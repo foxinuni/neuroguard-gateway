@@ -1,0 +1,36 @@
+services:       
+    ngrok:
+        image: ngrok/ngrok:latest
+        restart: unless-stopped
+        environment:
+            - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+        command:
+            - "http"
+            - "frontend:80"
+
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+            args:
+                - VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY}
+                - VITE_FIREBASE_AUTH_DOMAIN=${VITE_FIREBASE_AUTH_DOMAIN}
+                - VITE_FIREBASE_PROJECT_ID=${VITE_FIREBASE_PROJECT_ID}
+                - VITE_FIREBASE_STORAGE_BUCKET=${VITE_FIREBASE_STORAGE_BUCKET}
+                - VITE_FIREBASE_MESSAGING_SENDER_ID=${VITE_FIREBASE_MESSAGING_SENDER_ID}
+                - VITE_FIREBASE_APP_ID=${VITE_FIREBASE_APP_ID}
+
+    backend:
+        build: ./backend
+        environment:
+            MQTT_HOST:      ${MQTT_HOST}
+            MQTT_PORT:      ${MQTT_PORT:-8883}
+            MQTT_USER:      ${MQTT_USER}
+            MQTT_PASSWORD:  ${MQTT_PASSWORD}
+            MQTT_CLIENT_ID: ${MQTT_CLIENT_ID:-neuroguard-backend-01}
+            FIREBASE_CREDENTIALS_PATH: /app/firebase-credentials.json
+            HISTORY_SUBSAMPLE: ${HISTORY_SUBSAMPLE:-5}
+        volumes:
+            - ./firebase-credentials.json:/app/firebase-credentials.json:zro
+        
+        

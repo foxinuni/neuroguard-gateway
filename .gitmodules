@@ -1,0 +1,6 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/foxinuni/neuroguard-frontend
+[submodule "backend"]
+	path = backend
+	url = git@github.com:foxinuni/neuroguard-backend.git
