@@ -31,6 +31,6 @@ services:
             FIREBASE_CREDENTIALS_PATH: /app/firebase-credentials.json
             HISTORY_SUBSAMPLE: ${HISTORY_SUBSAMPLE:-5}
         volumes:
-            - ./firebase-credentials.json:/app/firebase-credentials.json:zro
+            - ./firebase-credentials.json:/app/firebase-credentials.json:ro
         
         
