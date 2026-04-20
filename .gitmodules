@@ -3,4 +3,4 @@
 	url = https://github.com/foxinuni/neuroguard-frontend
 [submodule "backend"]
 	path = backend
-	url = https://github.com/foxinuni/neuroguard-backend
+	url = https://github.com/foxinuni/neuroguard-backend.git
